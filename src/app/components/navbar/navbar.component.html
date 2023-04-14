@@ -37,9 +37,10 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
             ngbDropdownToggle
-            *ngIf="auth.user$ | async as user; else anonymousUser"
+            *ngIf="appUser; else anonymousUser"
           >
-            {{ user.displayName }}
+            <!-- {{ user.displayName }} with auth.user$-->
+            {{ appUser.name }}
           </a>
           <ul
             ngbDropdownMenu
@@ -49,6 +50,19 @@
             <li>
               <a class="dropdown-item" routerLink="/my-orders">My Orders</a>
             </li>
+            <ng-container *ngIf="appUser.isAdmin"
+              ><li>
+                <a class="dropdown-item" routerLink="/admin/manage-orders"
+                  >Manage Orders</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" routerLink="/admin/manage-products"
+                  >Manage Products</a
+                >
+              </li></ng-container
+            >
+
             <!-- <li>
               <a class="dropdown-item" routerLink="/shopping-cart"
                 >My Wish List</a

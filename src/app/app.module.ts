@@ -20,6 +20,10 @@ import { LoginComponent } from './components/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import { ManageProductsComponent } from './components/admin/manage-products/manage-products.component';
+import { ManagerOrdersComponent } from './components/admin/manager-orders/manager-orders.component';
+import { UserService } from './services/user.service';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,8 @@ import { AuthGuardService } from './services/auth-guard.service';
     OrderSuccessComponent,
     MyOrdersComponent,
     LoginComponent,
+    ManageProductsComponent,
+    ManagerOrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,10 +72,25 @@ import { AuthGuardService } from './services/auth-guard.service';
         component: MyOrdersComponent,
         canActivate: [AuthGuardService],
       },
+      {
+        path: 'admin/manage-orders',
+        component: ManagerOrdersComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService],
+      },
+      {
+        path: 'admin/manage-products',
+        component: ManageProductsComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService],
+      },
     ]),
     NgbModule,
   ],
-  providers: [AuthenticationService, AuthGuardService],
+  providers: [
+    AuthenticationService,
+    AuthGuardService,
+    AdminAuthGuardService,
+    UserService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
