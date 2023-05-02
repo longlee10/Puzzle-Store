@@ -1,1 +1,37 @@
-<p>manage-products works!</p>
+<p>
+  <a routerLink="/admin/manage-products/new" class="btn btn-primary"
+    >New Product</a
+  >
+</p>
+<p>
+  <input
+    #query
+    type="text"
+    class="form-control"
+    placeholder="Searching for a product..."
+    (keyup)="filter(query.value)"
+  />
+</p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr *ngFor="let p of products$ |async"> -->
+    <tr *ngFor="let p of products$">
+      <td>{{ p.payload.val().title }}</td>
+      <td>{{ p.payload.val().price }}</td>
+      <td>{{ p.payload.val().category }}</td>
+      <!-- <td>{{ p.payload.val().title }}</td>
+      <td>{{ p.payload.val().price }}</td>
+      <td>{{ p.payload.val().category }}</td> -->
+      <td><a [routerLink]="['/admin/manage-products/', p.key]">Edit</a></td>
+    </tr>
+  </tbody>
+</table>

@@ -9,12 +9,18 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class NavbarComponent {
   appUser: AppUser;
+  isAdmin: boolean;
 
   constructor(public auth: AuthenticationService) {
     // afAuth.authState.subscribe((user) => {
     //   this.user = user;
     // });
-    auth.appUser$.subscribe((appUser) => (this.appUser = appUser));
+    auth.appUser$.subscribe((appUser) => {
+      if (appUser) {
+        this.appUser = appUser;
+        this.isAdmin = this.appUser.isAdmin;
+      }
+    });
   }
   logout() {
     this.auth.logout();

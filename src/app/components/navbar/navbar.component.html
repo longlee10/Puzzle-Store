@@ -50,7 +50,7 @@
             <li>
               <a class="dropdown-item" routerLink="/my-orders">My Orders</a>
             </li>
-            <ng-container *ngIf="appUser.isAdmin"
+            <ng-container *ngIf="isAdmin"
               ><li>
                 <a class="dropdown-item" routerLink="/admin/manage-orders"
                   >Manage Orders</a
