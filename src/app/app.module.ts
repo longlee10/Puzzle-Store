@@ -31,6 +31,7 @@ import { CategoriesService } from './services/categories.service';
 import { ProductService } from './services/product.service';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ShoppingCartService } from './services/shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     UserService,
     CategoriesService,
     ProductService,
+    ShoppingCartService,
   ],
   bootstrap: [AppComponent],
 })

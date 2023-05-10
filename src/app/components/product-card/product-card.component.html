@@ -10,7 +10,28 @@
       {{ product.payload.val().price | currency : "USD" }}
     </p>
     <div class="card-footer">
-      <a href="#" class="btn btn-primary col-12">Add to Cart</a>
+      <button
+        *ngIf="getQuantity() === 0; else quantity"
+        (click)="addToCart()"
+        class="btn btn-secondary col-12"
+      >
+        Add to Cart
+      </button>
+      <ng-template #quantity
+        ><div class="row g-0">
+          <div class="col-2">
+            <button class="btn btn-secondary col-12" (click)="removeFromCart()">
+              -
+            </button>
+          </div>
+          <div class="col text-center">{{ getQuantity() }} in cart</div>
+          <div class="col-2">
+            <button class="btn btn-secondary col-12" (click)="addToCart()">
+              +
+            </button>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, map, switchMap } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
+import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
 @Component({
   selector: 'app-products',
@@ -13,10 +14,12 @@ export class ProductsComponent {
   category;
   subscription: Subscription;
   filteredProduct;
+  cart: any;
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private shoppingCartService: ShoppingCartService
   ) {
     this.subscription = productService
       .getAll()
@@ -40,6 +43,14 @@ export class ProductsComponent {
             : (this.filteredProduct = this.products$);
         });
     });
+  }
+
+  async ngOnInit() {
+    this.subscription = (await this.shoppingCartService.getCart())
+      .valueChanges()
+      .subscribe((cart) => {
+        this.cart = cart;
+      });
   }
 
   ngOnDestroy() {

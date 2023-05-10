@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { AngularFireObject } from '@angular/fire/compat/database';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Product } from 'src/app/models/product';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -22,11 +24,13 @@ export class ProductFormComponent {
     this.categories$ = categoriesService.getAll();
     this.key = this.route.snapshot.paramMap.get('key');
 
-    this.productService
-      .get(this.key)
-      .valueChanges()
-      .subscribe((p) => (this.product = p));
+    this.productService.get(this.key).subscribe((p) => {
+      this.product = p;
+      console.log(this.product);
+    });
   }
+
+  // https://stackoverflow.com/questions/50313778/two-way-binding-showing-in-angular5-showing-typeerror-cannot-read-property-tit
 
   save(product: Object) {
     if (this.key) this.productService.update(this.key, product);
