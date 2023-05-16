@@ -18,7 +18,10 @@
           <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link" routerLink="/products">Products</a>
+          <a class="nav-link" routerLink="/products">Mass Produced Puzzles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/custom-puzzle">Custom Puzzles</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/shopping-cart"
@@ -26,6 +29,12 @@
             <span class="badge bg-warning rounded-pill">{{ itemCount }}</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a routerLink="/wish-list" class="nav-link" *ngIf="appUser"
+            >Wish List</a
+          >
+        </li>
+
         <ng-template #anonymousUser>
           <li class="nav-item">
             <a class="nav-link" routerLink="/login">Sign In</a>

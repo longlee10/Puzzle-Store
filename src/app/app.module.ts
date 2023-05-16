@@ -32,6 +32,10 @@ import { ProductService } from './services/product.service';
 import { ProductFilterComponent } from './components/product-filter/product-filter.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ShoppingCartService } from './services/shopping-cart.service';
+import { HeartComponent } from './components/heart/heart.component';
+import { WishListComponent } from './components/wish-list/wish-list.component';
+import { CustomProductsComponent } from './components/custom-products/custom-products.component';
+import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,10 @@ import { ShoppingCartService } from './services/shopping-cart.service';
     ProductFormComponent,
     ProductFilterComponent,
     ProductCardComponent,
+    HeartComponent,
+    WishListComponent,
+    CustomProductsComponent,
+    ProductQuantityComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,9 +72,15 @@ import { ShoppingCartService } from './services/shopping-cart.service';
         path: 'products',
         component: ProductsComponent,
       },
+      { path: 'custom-puzzle', component: CustomProductsComponent },
       {
         path: 'shopping-cart',
         component: ShoppingCartComponent,
+      },
+      {
+        path: 'wish-list',
+        component: WishListComponent,
+        canActivate: [AuthGuardService],
       },
       { path: 'login', component: LoginComponent },
       {

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AppUser } from 'src/app/models/app-user';
+import { ShoppingCart } from 'src/app/models/shopping-cart';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { ShoppingCartService } from 'src/app/services/shopping-cart.service';
 
@@ -12,6 +14,7 @@ export class NavbarComponent {
   appUser: AppUser;
   isAdmin: boolean;
   itemCount: number;
+  //cart$;
 
   constructor(
     private auth: AuthenticationService,
@@ -29,7 +32,7 @@ export class NavbarComponent {
       }
     });
 
-    //Displaying number of items in cart on the nav bar
+    // Displaying number of items in cart on the nav bar
     let cart$ = (await this.cartService.getCart())
       .valueChanges()
       .subscribe((cart: any) => {
@@ -37,6 +40,9 @@ export class NavbarComponent {
         for (let productId in cart.items)
           this.itemCount += cart.items[productId].quantity;
       });
+
+    // this.cart$ = await this.cartService.getCart();
+    // console.log(this.cart$);
   }
 
   logout() {
